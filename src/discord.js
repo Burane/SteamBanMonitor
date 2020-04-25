@@ -191,6 +191,16 @@ function banAlert() {
     })
 }
 
+function help(msg) {
+    let str = '**!infos** *<profile link>* envoie des infos sur le profil \n'
+    str += '**!watchadd** *<profile link>* ajoute un profile que le bot va surveiller\n'
+    str += '**!watchrm** *<profile link>* retire un profile que le bot va surveiller\n'
+    str += '**!watchls**  affiche la liste des profiles en cours de surveillance\n'
+    str += '**!banls** affiche la liste des profiles bannis\n'
+    str += '*projet disponnible sur https://github.com/Burane/SteamBanMonitor*'
+    msg.channel.send(str)
+}
+
 function banCheck() {
     lookForBans()
     banAlert()
