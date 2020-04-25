@@ -19,7 +19,7 @@ discordClient.login(apiKey.discord);
 discordClient.on('ready', () => {
     console.log(`Logged in as ${discordClient.user.tag}!`)
     banCheck()
-    setInterval(banCheck, 60000)
+    setInterval(banCheck, 600000)
 });
 
 discordClient.on('message', msg => {
@@ -173,15 +173,15 @@ function lookForBans() {
 }
 
 function banAlert() {
-    let ids = db.prepare('select ID_64, BANNED_DATE from STEAM_BAN_MONITOR where BANNED = 1 and BANNED_DATE - ? <= 60000').all(Date.now())
+    let ids = db.prepare('select ID_64, BANNED_DATE from STEAM_BAN_MONITOR where BANNED = 1 and BANNED_DATE - ? <= 600000').all(Date.now())
     ids.forEach(id => {
         // 607903859934756892 channelId de generale  323894435203121172 matpute id
         let guild = discordClient.guilds.cache.get('323894435203121172')
         let chan = guild.channels.cache.get('607903859934756892')
-        chan.send('🚨 ***UN BANNISSEMENT*** 🚨')
+        chan.send('🚨   ***UN BANNISSEMENT***   🚨')
         steamApi.getInfos(id.ID_64).then(summary => {
                 chan.send(createEmbed(summary))
-                chan.send('🚨 ***FIN ALERTE*** 🚨')
+                chan.send('🚨   ***FIN ALERTE***   🚨')
             })
             .catch(err => {
                 console.error(err)
