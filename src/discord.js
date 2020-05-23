@@ -173,7 +173,7 @@ function lookForBans() {
 }
 
 function banAlert() {
-    let ids = db.prepare('select ID_64, BANNED_DATE from STEAM_BAN_MONITOR where BANNED = 1 and BANNED_DATE - ? <= 600000').all(Date.now())
+    let ids = db.prepare('select ID_64, BANNED_DATE from STEAM_BAN_MONITOR where BANNED = 1 and ? - BANNED_DATE <= 600000').all(Date.now())
     ids.forEach(id => {
         // 607903859934756892 channelId de generale  323894435203121172 matpute id
         let guild = discordClient.guilds.cache.get('323894435203121172')
